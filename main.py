@@ -21,7 +21,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL_1")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL_1", "sqlite:///blog.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -71,7 +71,7 @@ class Comment(db.Model):
     text = db.Column(db.Text, nullable=False)
 
 
-db.create_all()
+# db.create_all()
 
 
 @login_manager.user_loader
